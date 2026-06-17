@@ -36,6 +36,7 @@ export default function TaskForm({
         ...initialValues,
     });
     const [errors, setErrors] = useState<{ title?: string }>({});
+    const [submitError, setSubmitError] = useState<string | null>(null);
     const [submitting, setSubmitting] = useState(false);
 
     function updateField<K extends keyof TaskFormValues>(
@@ -53,9 +54,14 @@ export default function TaskForm({
             setErrors(validationErrors);
             return;
         }
+        setSubmitError(null);
         setSubmitting(true);
         try {
             await onSubmit(values);
+        } catch (err) {
+            setSubmitError(
+                err instanceof Error ? err.message : "保存に失敗しました。もう一度お試しください。"
+            );
         } finally {
             setSubmitting(false);
         }
@@ -114,6 +120,11 @@ export default function TaskForm({
                     updateField("dueDate", e.target.value === "" ? null : e.target.value)
                 }
             />
+            {submitError && (
+                <p className="text-sm text-red-500 bg-red-50 px-3 py-2 rounded-lg">
+                    {submitError}
+                </p>
+            )}
             <div className="flex gap-3 pt-2">
                 <Button
                     type="button"
