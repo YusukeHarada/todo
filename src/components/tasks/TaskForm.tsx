@@ -121,7 +121,7 @@ export default function TaskForm({
                 }
             />
             {submitError && (
-                <p className="text-sm text-red-500 bg-red-50 px-3 py-2 rounded-lg">
+                <p className="text-sm text-red-500 dark:text-red-400 bg-red-50 dark:bg-red-900/20 px-3 py-2 rounded-lg">
                     {submitError}
                 </p>
             )}

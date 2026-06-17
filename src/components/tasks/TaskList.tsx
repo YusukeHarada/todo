@@ -20,7 +20,16 @@ export default function TaskList() {
     if (loading) {
         return (
             <div className="flex items-center justify-center py-16">
-                <p className="text-gray-500">読み込み中...</p>
+                <p className="text-gray-500 dark:text-gray-400">読み込み中...</p>
+            </div>
+        );
+    }
+
+    if (error) {
+        return (
+            <div className="px-4 py-8 text-sm text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-900/20 m-4 rounded-lg">
+                <p className="font-medium">データの取得に失敗しました</p>
+                <p className="mt-1">{error}</p>
             </div>
         );
     }
@@ -46,7 +55,7 @@ export default function TaskList() {
                 onSortChange={setSortBy}
             />
             {sorted.length === 0 ? (
-                <div className="flex flex-col items-center justify-center py-16 gap-2 text-gray-400">
+                <div className="flex flex-col items-center justify-center py-16 gap-2 text-gray-400 dark:text-gray-500">
                     <p>タスクがありません</p>
                 </div>
             ) : (

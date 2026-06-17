@@ -56,7 +56,16 @@ export default function CategoryList() {
     if (loading) {
         return (
             <div className="flex items-center justify-center py-16">
-                <p className="text-gray-500">読み込み中...</p>
+                <p className="text-gray-500 dark:text-gray-400">読み込み中...</p>
+            </div>
+        );
+    }
+
+    if (error) {
+        return (
+            <div className="px-4 py-8 text-sm text-red-600 dark:text-red-400 bg-red-50 dark:bg-red-900/20 m-4 rounded-lg">
+                <p className="font-medium">データの取得に失敗しました</p>
+                <p className="mt-1 text-red-500 dark:text-red-400">{error}</p>
             </div>
         );
     }
@@ -73,7 +82,7 @@ export default function CategoryList() {
     if (mode.type === "create") {
         return (
             <div className="px-4 py-6">
-                <h2 className="text-lg font-bold mb-4">カテゴリを追加</h2>
+                <h2 className="text-lg font-bold mb-4 dark:text-gray-100">カテゴリを追加</h2>
                 <CategoryForm
                     onSubmit={handleCreate}
                     onCancel={() => setMode({ type: "list" })}
@@ -87,7 +96,7 @@ export default function CategoryList() {
         const cat = mode.category;
         return (
             <div className="px-4 py-6">
-                <h2 className="text-lg font-bold mb-4">カテゴリを編集</h2>
+                <h2 className="text-lg font-bold mb-4 dark:text-gray-100">カテゴリを編集</h2>
                 <CategoryForm
                     initialValues={{ name: cat.name, color: cat.color }}
                     onSubmit={(values) => handleUpdate(cat, values)}
@@ -99,8 +108,8 @@ export default function CategoryList() {
 
     return (
         <div>
-            <div className="flex items-center justify-between px-4 py-3 border-b border-gray-100">
-                <span className="text-sm text-gray-500">
+            <div className="flex items-center justify-between px-4 py-3 border-b border-gray-100 dark:border-gray-800">
+                <span className="text-sm text-gray-500 dark:text-gray-400">
                     {categories.length} 件
                 </span>
                 <Button
@@ -112,7 +121,7 @@ export default function CategoryList() {
                 </Button>
             </div>
             {categories.length === 0 ? (
-                <div className="flex flex-col items-center justify-center py-16 text-gray-400">
+                <div className="flex flex-col items-center justify-center py-16 text-gray-400 dark:text-gray-500">
                     <p>カテゴリがありません</p>
                 </div>
             ) : (
@@ -120,25 +129,25 @@ export default function CategoryList() {
                     {categories.map((cat) => (
                         <li
                             key={cat.id}
-                            className="flex items-center gap-3 px-4 py-3 border-b border-gray-100"
+                            className="flex items-center gap-3 px-4 py-3 border-b border-gray-100 dark:border-gray-800"
                         >
                             <span
                                 className="w-4 h-4 rounded-full shrink-0"
                                 style={{ backgroundColor: cat.color }}
                             />
-                            <span className="flex-1 text-base">{cat.name}</span>
+                            <span className="flex-1 text-base dark:text-gray-100">{cat.name}</span>
                             <button
                                 onClick={() =>
                                     setMode({ type: "edit", category: cat })
                                 }
-                                className="text-sm text-blue-600 px-2 py-1"
+                                className="text-sm text-blue-600 dark:text-blue-400 px-2 py-1"
                             >
                                 編集
                             </button>
                             <button
                                 onClick={() => handleDelete(cat)}
                                 disabled={deleting === cat.id}
-                                className="text-sm text-red-600 px-2 py-1 disabled:opacity-50"
+                                className="text-sm text-red-600 dark:text-red-400 px-2 py-1 disabled:opacity-50"
                             >
                                 削除
                             </button>

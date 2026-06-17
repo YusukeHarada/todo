@@ -15,12 +15,12 @@ export default function AppHeader() {
     }
 
     return (
-        <header className="h-14 flex items-center justify-between px-4 border-b border-gray-200 bg-white shrink-0">
-            <h1 className="text-lg font-bold">Todo</h1>
+        <header className="h-14 flex items-center justify-between px-4 border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-900 shrink-0">
+            <h1 className="text-lg font-bold text-gray-900 dark:text-gray-100">Todo</h1>
             <div className="relative">
                 <button
                     onClick={() => setMenuOpen((v) => !v)}
-                    className="w-9 h-9 rounded-full overflow-hidden flex items-center justify-center bg-gray-200"
+                    className="w-9 h-9 rounded-full overflow-hidden flex items-center justify-center bg-gray-200 dark:bg-gray-700"
                     aria-label="メニュー"
                 >
                     {user?.photoURL ? (
@@ -32,7 +32,7 @@ export default function AppHeader() {
                         />
                     ) : (
                         <svg
-                            className="w-5 h-5 text-gray-500"
+                            className="w-5 h-5 text-gray-500 dark:text-gray-400"
                             fill="currentColor"
                             viewBox="0 0 24 24"
                         >
@@ -41,13 +41,13 @@ export default function AppHeader() {
                     )}
                 </button>
                 {menuOpen && (
-                    <div className="absolute right-0 top-11 w-40 bg-white border border-gray-200 rounded-lg shadow-lg z-50">
-                        <div className="px-4 py-2 text-sm text-gray-500 border-b border-gray-100 truncate">
+                    <div className="absolute right-0 top-11 w-40 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg shadow-lg z-50">
+                        <div className="px-4 py-2 text-sm text-gray-500 dark:text-gray-400 border-b border-gray-100 dark:border-gray-700 truncate">
                             {user?.displayName ?? user?.email}
                         </div>
                         <button
                             onClick={handleSignOut}
-                            className="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-gray-50"
+                            className="w-full text-left px-4 py-2 text-sm text-red-600 dark:text-red-400 hover:bg-gray-50 dark:hover:bg-gray-700"
                         >
                             ログアウト
                         </button>
