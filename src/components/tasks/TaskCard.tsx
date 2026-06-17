@@ -18,7 +18,7 @@ export default function TaskCard({ task, onToggleCompleted }: Props) {
 
     return (
         <div
-            className={`flex items-start gap-3 p-4 border-b border-gray-100 ${
+            className={`flex items-start gap-3 p-4 border-b border-gray-100 dark:border-gray-800 ${
                 task.completed ? "opacity-60" : ""
             }`}
         >
@@ -26,7 +26,7 @@ export default function TaskCard({ task, onToggleCompleted }: Props) {
                 onClick={() => onToggleCompleted(task)}
                 className="mt-0.5 shrink-0 w-5 h-5 rounded border-2 flex items-center justify-center transition-colors"
                 style={{
-                    borderColor: task.completed ? "#3B82F6" : "#D1D5DB",
+                    borderColor: task.completed ? "#3B82F6" : "#6B7280",
                     backgroundColor: task.completed ? "#3B82F6" : "transparent",
                 }}
                 aria-label={task.completed ? "未完了に戻す" : "完了にする"}
@@ -47,13 +47,12 @@ export default function TaskCard({ task, onToggleCompleted }: Props) {
                     </svg>
                 )}
             </button>
-            <Link
-                href={`/tasks/${task.id}`}
-                className="flex-1 min-w-0 block"
-            >
+            <Link href={`/tasks/${task.id}`} className="flex-1 min-w-0 block">
                 <p
                     className={`text-base font-medium truncate ${
-                        task.completed ? "line-through text-gray-400" : "text-gray-900"
+                        task.completed
+                            ? "line-through text-gray-400 dark:text-gray-500"
+                            : "text-gray-900 dark:text-gray-100"
                     }`}
                 >
                     {task.title}
@@ -71,7 +70,9 @@ export default function TaskCard({ task, onToggleCompleted }: Props) {
                     {task.dueDate && (
                         <span
                             className={`text-xs ${
-                                overdue ? "text-red-500 font-medium" : "text-gray-500"
+                                overdue
+                                    ? "text-red-500 dark:text-red-400 font-medium"
+                                    : "text-gray-500 dark:text-gray-400"
                             }`}
                         >
                             {overdue ? "⚠ " : ""}

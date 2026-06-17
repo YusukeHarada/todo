@@ -46,7 +46,7 @@ export default function TaskDetailPage() {
     if (loading) {
         return (
             <div className="flex items-center justify-center py-16">
-                <p className="text-gray-500">読み込み中...</p>
+                <p className="text-gray-500 dark:text-gray-400">読み込み中...</p>
             </div>
         );
     }
@@ -54,7 +54,7 @@ export default function TaskDetailPage() {
     if (!task) {
         return (
             <div className="flex flex-col items-center justify-center py-16 gap-4">
-                <p className="text-gray-500">タスクが見つかりません</p>
+                <p className="text-gray-500 dark:text-gray-400">タスクが見つかりません</p>
                 <Button variant="secondary" onClick={() => router.push("/")}>
                     一覧に戻る
                 </Button>
@@ -65,7 +65,7 @@ export default function TaskDetailPage() {
     if (mode === "edit") {
         return (
             <div className="px-4 py-6">
-                <h2 className="text-lg font-bold mb-4">タスクを編集</h2>
+                <h2 className="text-lg font-bold mb-4 dark:text-gray-100">タスクを編集</h2>
                 <TaskForm
                     initialValues={{
                         title: task.title,
@@ -84,10 +84,10 @@ export default function TaskDetailPage() {
     return (
         <div className="px-4 py-6 flex flex-col gap-4">
             <div className="flex items-start justify-between gap-3">
-                <h2 className="text-xl font-bold flex-1">{task.title}</h2>
+                <h2 className="text-xl font-bold flex-1 dark:text-gray-100">{task.title}</h2>
                 <button
                     onClick={() => setMode("edit")}
-                    className="text-sm text-blue-600 px-2 py-1 shrink-0"
+                    className="text-sm text-blue-600 dark:text-blue-400 px-2 py-1 shrink-0"
                 >
                     編集
                 </button>
@@ -103,15 +103,15 @@ export default function TaskDetailPage() {
                     </span>
                 )}
                 {task.dueDate && (
-                    <span className="text-sm text-gray-500">
+                    <span className="text-sm text-gray-500 dark:text-gray-400">
                         期日: {task.dueDate}
                     </span>
                 )}
             </div>
             {task.description && (
-                <p className="text-gray-600 whitespace-pre-wrap">{task.description}</p>
+                <p className="text-gray-600 dark:text-gray-300 whitespace-pre-wrap">{task.description}</p>
             )}
-            <p className="text-xs text-gray-400">
+            <p className="text-xs text-gray-400 dark:text-gray-500">
                 作成: {new Date(task.createdAt).toLocaleString("ja-JP")}
             </p>
             <div className="pt-4">

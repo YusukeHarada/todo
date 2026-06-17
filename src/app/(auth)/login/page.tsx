@@ -32,18 +32,18 @@ export default function LoginPage() {
     if (loading) {
         return (
             <div className="flex items-center justify-center h-dvh">
-                <p className="text-gray-500">読み込み中...</p>
+                <p className="text-gray-500 dark:text-gray-400">読み込み中...</p>
             </div>
         );
     }
 
     return (
         <div className="flex flex-col items-center justify-center h-dvh px-6 gap-8">
-            <h1 className="text-2xl font-bold">Todo</h1>
+            <h1 className="text-2xl font-bold dark:text-gray-100">Todo</h1>
             <button
                 onClick={handleGoogleSignIn}
                 disabled={signingIn}
-                className="flex items-center gap-3 px-6 py-3 border border-gray-300 rounded-lg text-base font-medium hover:bg-gray-50 active:bg-gray-100 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                className="flex items-center gap-3 px-6 py-3 border border-gray-300 dark:border-gray-600 rounded-lg text-base font-medium hover:bg-gray-50 dark:hover:bg-gray-800 active:bg-gray-100 dark:active:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors dark:text-gray-100"
             >
                 <svg className="w-5 h-5" viewBox="0 0 24 24">
                     <path
@@ -65,7 +65,7 @@ export default function LoginPage() {
                 </svg>
                 {signingIn ? "ログイン中..." : "Googleでログイン"}
             </button>
-            {error && <p className="text-red-500 text-sm">{error}</p>}
+            {error && <p className="text-red-500 dark:text-red-400 text-sm">{error}</p>}
         </div>
     );
 }

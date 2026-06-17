@@ -18,7 +18,7 @@ export default function NewTaskPage() {
 
     return (
         <div className="px-4 py-6">
-            <h2 className="text-lg font-bold mb-4">タスクを追加</h2>
+            <h2 className="text-lg font-bold mb-4 dark:text-gray-100">タスクを追加</h2>
             <TaskForm
                 onSubmit={handleSubmit}
                 onCancel={() => router.back()}
