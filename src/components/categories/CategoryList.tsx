@@ -70,6 +70,15 @@ export default function CategoryList() {
         );
     }
 
+    if (error) {
+        return (
+            <div className="px-4 py-8 text-sm text-red-600 bg-red-50 m-4 rounded-lg">
+                <p className="font-medium">データの取得に失敗しました</p>
+                <p className="mt-1 text-red-500">{error}</p>
+            </div>
+        );
+    }
+
     if (mode.type === "create") {
         return (
             <div className="px-4 py-6">
