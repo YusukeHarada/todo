@@ -4,8 +4,10 @@ import {
     deleteDoc,
     doc,
     onSnapshot,
+    query,
     serverTimestamp,
     updateDoc,
+    where,
     type Unsubscribe,
 } from "firebase/firestore";
 import { db } from "@/lib/firebase/client";
@@ -27,15 +29,16 @@ export function subscribeToCategories(
     onData: (categories: Category[]) => void,
     onError: (error: Error) => void
 ): Unsubscribe {
-    const q = collection(db, COLLECTIONS.CATEGORIES);
+    const q = query(
+        collection(db, COLLECTIONS.CATEGORIES),
+        where("userId", "==", userId)
+    );
     return onSnapshot(
         q,
         (snapshot) => {
-            const categories = snapshot.docs
-                .filter((d) => (d.data() as Record<string, unknown>).userId === userId)
-                .map((d) =>
-                    docToCategory(d.id, d.data() as Record<string, unknown>)
-                );
+            const categories = snapshot.docs.map((d) =>
+                docToCategory(d.id, d.data() as Record<string, unknown>)
+            );
             onData(categories);
         },
         onError
