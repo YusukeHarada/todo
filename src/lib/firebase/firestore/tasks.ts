@@ -4,7 +4,9 @@ import {
     deleteDoc,
     doc,
     onSnapshot,
+    query,
     updateDoc,
+    where,
     type Unsubscribe,
 } from "firebase/firestore";
 import { db } from "@/lib/firebase/client";
@@ -31,13 +33,16 @@ export function subscribeToTasks(
     onData: (tasks: Task[]) => void,
     onError: (error: Error) => void
 ): Unsubscribe {
-    const q = collection(db, COLLECTIONS.TASKS);
+    const q = query(
+        collection(db, COLLECTIONS.TASKS),
+        where("userId", "==", userId)
+    );
     return onSnapshot(
         q,
         (snapshot) => {
-            const tasks = snapshot.docs
-                .filter((d) => (d.data() as Record<string, unknown>).userId === userId)
-                .map((d) => docToTask(d.id, d.data() as Record<string, unknown>));
+            const tasks = snapshot.docs.map((d) =>
+                docToTask(d.id, d.data() as Record<string, unknown>)
+            );
             onData(tasks);
         },
         onError
