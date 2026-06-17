@@ -9,7 +9,7 @@ import TaskCard from "./TaskCard";
 import TaskFilterBar from "./TaskFilterBar";
 
 export default function TaskList() {
-    const { tasks, loading } = useTasks();
+    const { tasks, loading, error } = useTasks();
     const [filter, setFilter] = useState<TaskFilter>({ completed: false });
     const [sortBy, setSortBy] = useState<TaskSortKey>("createdAt");
 
@@ -21,6 +21,15 @@ export default function TaskList() {
         return (
             <div className="flex items-center justify-center py-16">
                 <p className="text-gray-500">読み込み中...</p>
+            </div>
+        );
+    }
+
+    if (error) {
+        return (
+            <div className="px-4 py-8 text-sm text-red-600 bg-red-50 m-4 rounded-lg">
+                <p className="font-medium">データの取得に失敗しました</p>
+                <p className="mt-1 text-red-500">{error}</p>
             </div>
         );
     }

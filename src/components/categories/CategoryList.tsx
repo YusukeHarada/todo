@@ -21,7 +21,7 @@ type Mode =
 
 export default function CategoryList() {
     const { user } = useAuth();
-    const { categories, loading } = useCategories();
+    const { categories, loading, error } = useCategories();
     const { tasks } = useTasks();
     const [mode, setMode] = useState<Mode>({ type: "list" });
     const [deleting, setDeleting] = useState<string | null>(null);
@@ -57,6 +57,15 @@ export default function CategoryList() {
         return (
             <div className="flex items-center justify-center py-16">
                 <p className="text-gray-500">読み込み中...</p>
+            </div>
+        );
+    }
+
+    if (error) {
+        return (
+            <div className="px-4 py-8 text-sm text-red-600 bg-red-50 m-4 rounded-lg">
+                <p className="font-medium">データの取得に失敗しました</p>
+                <p className="mt-1 text-red-500">{error}</p>
             </div>
         );
     }
